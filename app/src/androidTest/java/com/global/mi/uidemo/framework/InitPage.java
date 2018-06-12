@@ -4,9 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.global.mi.uidemo.config.ConstDefs;
-import com.global.mi.uidemo.uiautoutils.FindBy;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -74,6 +72,14 @@ public class InitPage {
     }
 
 
+    /**
+     * 通过基类查找所有继承该基类的子类
+     * @param context   测试应用上下文
+     * @param clazz   基类
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @SuppressWarnings("unchecked")
     private static List<Class> getAllClassByBaseClass(Context context, Class clazz) throws IOException, ClassNotFoundException {
         List<Class> classes = new ArrayList<>();

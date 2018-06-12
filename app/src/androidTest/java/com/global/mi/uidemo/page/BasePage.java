@@ -1,5 +1,7 @@
 package com.global.mi.uidemo.page;
 
+import com.global.mi.uidemo.uiautoutils.ElementActions;
+
 /**
  * Created by wuyongqiang on 2018/5/28.
  */
@@ -17,6 +19,12 @@ public class BasePage {
     public static String products;
     public static String discover;
     public static String user;
+
+    protected static ElementActions actions;
+
+    BasePage(){
+        actions = new ElementActions();
+    }
 
     public static String spliceSelector(String type, String value){
         if (RES.equals(type)){

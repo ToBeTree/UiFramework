@@ -3,7 +3,7 @@ package com.global.mi.uidemo.page;
 import android.util.Log;
 
 import com.global.mi.uidemo.uiautoutils.Action;
-import com.global.mi.uidemo.uiautoutils.FindBy;
+import com.global.mi.uidemo.framework.FindBy;
 
 /**
  * Created by wuyongqiang on 2018/5/28.

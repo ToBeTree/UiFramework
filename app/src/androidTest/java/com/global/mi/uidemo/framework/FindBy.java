@@ -1,4 +1,4 @@
-package com.global.mi.uidemo.uiautoutils;
+package com.global.mi.uidemo.framework;
 
 
 import java.lang.annotation.Documented;

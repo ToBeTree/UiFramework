@@ -17,4 +17,6 @@ public class ConstDefs {
     public final static String TYPE_OPERATOR = "@";
     public final static String CLASS_OPERATOR = "#";
     public final static String POSITION_OPERATOR = "&";
+
+    public final static int MAXRETRYCOUNT = 3;
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Action {
 
-    public static FindElement fd = new FindElement();
+    public static ElementActions fd = new ElementActions();
 
     /**
      * 判断是否有&，如果有代表应该使用findElements。后面跟着的数据是指定list中的具体某个元素
@@ -24,7 +24,7 @@ public class Action {
             Log.i("click",selector);
             int position = Integer.parseInt(selector.split("&")[1]);
             selector = selector.split("&")[0];
-            List<UiObject2> object2s = fd.findeElements(selector);
+            List<UiObject2> object2s = fd.findElements(selector);
             object2 = object2s.get(position);
         }else {
             object2 = fd.findElement(selector);
@@ -45,5 +45,8 @@ public class Action {
 
     public static void scroll(String selector, int direction){
 
+    }
+    public Action aa(){
+        return this;
     }
 }
