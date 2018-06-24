@@ -1,15 +1,16 @@
 package com.global.mi.uidemo.testcase;
 
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.Until;
 
 import com.global.mi.uidemo.framework.InitPage;
+import com.global.mi.uidemo.framework.ToastListener;
+import com.global.mi.uidemo.page.BasePage;
 import com.global.mi.uidemo.page.MainPage;
-import com.global.mi.uidemo.page.ProductPage;
-import com.global.mi.uidemo.page.VersionPage;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,18 +21,36 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class ShopCase {
 
+    @BeforeClass
+    public static void initToast() throws NoSuchFieldException, IllegalAccessException {
+//        ToastListener.initToastListener(InstrumentationRegistry.getInstrumentation());
+//        UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
+//        uiAutomation.setOnAccessibilityEventListener(new UiAutomation.OnAccessibilityEventListener() {
+//            @Override
+//            public void onAccessibilityEvent(AccessibilityEvent event) {
+//                Log.i(ConstDefs.TAG,"listener");
+//            }
+//        });
+    }
+
     @Before
     public void init() throws Exception {
         InitPage.setAllField(InstrumentationRegistry.getContext());
+        ToastListener.initToastListener(InstrumentationRegistry.getInstrumentation());
     }
 
 
     @Test
     public void addCart(){
-        MainPage.clickProduct(2);
-//        Until.newWindow();
-        ProductPage.clickBuyBtn();
-        VersionPage.clickReturnBtn();
+        MainPage.setScrollViewDown();
+//        MainPage.clickProduct(2);
+//        BasePage.takeScreenShot("error");
+//        BasePage.pressBack();
+        SystemClock.sleep(5000);
+        MainPage.pressBack();
+        BasePage.checkToastValue("Tap Back button again to exit");
+//        ProductPage.clickBuyBtn();
+//        VersionPage.clickReturnBtn();
     }
 
 }

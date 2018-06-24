@@ -23,7 +23,8 @@ public class InitPage {
      * @throws Exception
      */
     public static void setAllField(Context context) throws Exception {
-        List<Class> classes = getAllClassByBaseClass(context, Class.forName(ConstDefs.BASEPAGE));
+        List<Class> classes = getAllClassByBaseClass(context, Class.forName(ConstDefs.BASE_PAGE));
+        Log.i(ConstDefs.TAG,"start init pages fields...");
         for (Class clazz:classes){
 //            clazz.getAnnotations();
             Field[] fields = clazz.getFields();
@@ -32,8 +33,8 @@ public class InitPage {
                 FindBy by = field.getAnnotation(FindBy.class);
                 String fieldValue = "";
                 if (by != null){
-                    //depth类型一定跟着Clazz和position
                     if (!by.depth().isEmpty()){
+                        //depth类型一定跟着Clazz和position
                         fieldValue = spliceSelector(ConstDefs.DEPTH,by.depth(),by.clazz(),by.position());
 //                        fieldValue = ConstDefs.DEPTH+ConstDefs.TYPE_OPERATOR+ConstDefs.CLAZZ+ConstDefs.CLASS_OPERATOR+ConstDefs.POSITION_OPERATOR;
                     }else if(!by.res().isEmpty()){
@@ -42,19 +43,23 @@ public class InitPage {
                         fieldValue = spliceSelector(ConstDefs.DESC,by.contentDesc());
                     }else if(!by.clazz().isEmpty()){
                         fieldValue = spliceSelector(ConstDefs.CLAZZ,by.clazz());
+                    }else if(!by.text().isEmpty()){
+                        fieldValue = spliceSelector(ConstDefs.TEXT,by.text());
                     }
                 }
                 Log.i(ConstDefs.TAG,fieldValue);
-                field.set(clazz,fieldValue);
+                if (!"".equals(fieldValue)){
+                    field.set(clazz,fieldValue);
+                }
             }
 
         }
+        Log.i(ConstDefs.TAG,"end init pages fields.");
     }
 
     private static String spliceSelector(String type,String value){
         String selector;
         selector = type + ConstDefs.TYPE_OPERATOR + value;
-        Log.i(ConstDefs.TAG,selector);
         return selector;
     }
 
@@ -67,7 +72,6 @@ public class InitPage {
     private static String spliceSelector(String type,String value,String clazz,String position){
         String selector;
         selector = type + ConstDefs.TYPE_OPERATOR + value + ConstDefs.CLASS_OPERATOR + clazz + ConstDefs.POSITION_OPERATOR + position;
-        Log.i(ConstDefs.TAG,selector);
         return selector;
     }
 
@@ -89,7 +93,7 @@ public class InitPage {
         //只有继承了BasePage的类才会添加进去
         while(classNames.hasMoreElements()){
             String className = classNames.nextElement();
-            if (className.contains(ConstDefs.BASEPAGE_PATH)){
+            if (className.contains(ConstDefs.BASE_PAGE_PATH)){
                 Class pClass = Class.forName(className);
                 if(clazz.isAssignableFrom(pClass)){
                     classes.add(pClass);

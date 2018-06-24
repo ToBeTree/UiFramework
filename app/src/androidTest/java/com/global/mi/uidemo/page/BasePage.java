@@ -1,6 +1,12 @@
 package com.global.mi.uidemo.page;
 
+import android.os.SystemClock;
+
+import com.global.mi.uidemo.framework.ToastListener;
+import com.global.mi.uidemo.uiautoutils.Action;
 import com.global.mi.uidemo.uiautoutils.ElementActions;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by wuyongqiang on 2018/5/28.
@@ -8,54 +14,40 @@ import com.global.mi.uidemo.uiautoutils.ElementActions;
 
 public class BasePage {
 
-    public final static String DEPTH = "depth";
-    public final static String RES = "res";
-    public final static String CLAZZ = "clazz";
-    public final static String DESC = "desc";
-    public final static String TEXT = "text";
-    public final static String PKG = "pkg";
-    public static String cart;
-    public static String mistore;
-    public static String products;
-    public static String discover;
-    public static String user;
+    public static String DEPTH;
+    public static String RES;
+    public static String CLAZZ;
+    public static String DESC;
+    public static String TEXT;
+    public static String PKG;
 
-    protected static ElementActions actions;
 
-    BasePage(){
-        actions = new ElementActions();
+    public static Action elementAction = new Action();
+
+
+    public static boolean checkToastValue(String toast) {
+        SystemClock.sleep(200);
+        assertEquals(getToast(), toast);
+        return false;
     }
 
-    public static String spliceSelector(String type, String value){
-        if (RES.equals(type)){
-            return type + "#" +value;
-        }
-        if (DEPTH.equals(type)){
-            return type+"#"+value;
-        }
-        if (type==CLAZZ){
-            return type + "#" +value;
-        }
-        if (type==DESC){
+    public static String getToast() {
+        String toast = "";
+        SystemClock.sleep(500);
+        toast = ToastListener.getToastMessage();
+        return toast;
+    }
 
-        }
-        if (type==PKG){
+    public static void pressBack() {
+        elementAction.pressBack();
+    }
 
-        }
-        if (type==TEXT){
-
-        }
+    public static String getCurrentWindowTitle() {
 
         return null;
     }
 
-    public static String getToastValue(){
-
-        return null;
-    }
-
-    public static String getCurrentWindowTitle(){
-
-        return null;
+    public static void takeScreenShot(String desription) {
+        ElementActions.tackScreenShot(desription);
     }
 }

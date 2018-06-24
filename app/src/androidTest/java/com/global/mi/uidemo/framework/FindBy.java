@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Documented
 @Target({ElementType.ANNOTATION_TYPE,ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Inherited
+//@Inherited
 public @interface FindBy {
 
     String res() default "";
