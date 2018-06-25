@@ -1,8 +1,9 @@
 package com.global.mi.uidemo.page;
 
+import android.support.test.uiautomator.Direction;
 import android.util.Log;
 
-import com.global.mi.uidemo.uiautoutils.Action;
+import com.global.mi.uidemo.config.ConstDefs;
 import com.global.mi.uidemo.framework.FindBy;
 
 /**
@@ -10,27 +11,68 @@ import com.global.mi.uidemo.framework.FindBy;
  */
 
 public class MainPage extends BasePage {
-    public static String gallery;
-    public static String PHONE_LIST = "product_image";
-    @FindBy(res="product_image",description="明星产品")
-    public static String PRODUCTS_LIST = spliceSelector(RES, "product_image");
-    @FindBy(description = "更多配件按钮")
-    public static String accessories;
-    public static String more;
+
+    @FindBy(text = "Mi Store")
+    public static String MI_STORE;
+    @FindBy(text = "Products")
+    public static String PRODUCTS;
+    @FindBy(text = "Discover")
+    public static String DISCOVER;
+    @FindBy(text = "Account")
+    public static String USER;
+    @FindBy(res = "shopping_cart")
+    public static String CART;
+    @FindBy(res = "iv_title_icon")
+    public static String PAGE_TITLE;
+    @FindBy(clazz = "android.widget.ListView")
+    public static String SCROLL_VIEW;
+
+    public static void clickStore() {
+        elementAction.click(MI_STORE);
+    }
 
     public static void clickProduct() {
-//        Action.click(PRODUCTS_LIST);
-//        Action.waitNewWindow();
-
-        Action.clickAndWaitNewWindow(PRODUCTS_LIST);
+        elementAction.click(PRODUCTS);
     }
-    public static void clickProduct(int position) {
-        if (position<=0){
-            Log.i("MainPage","Element position must be >=1");
+
+    public static void clickDiscover() {
+        elementAction.click(DISCOVER);
+    }
+
+    public static void clickUser() {
+        elementAction.click(USER);
+    }
+
+    public static void clickCart() {
+        elementAction.click(CART);
+    }
+
+    public static boolean checkCurrentTabTitle(String title) {
+        if ("".equals(title) || title == null) {
+            Log.i(ConstDefs.TAG, "check page title can not be null");
+            return false;
         }
-        PRODUCTS_LIST = PRODUCTS_LIST + "&"+Integer.toString(position-1);
-        Action.clickAndWaitNewWindow(PRODUCTS_LIST);
+        return title.equals(getCurrentTabTitle());
     }
 
+    private static String getCurrentTabTitle() {
+        return elementAction.getObject2(PAGE_TITLE).getText();
+    }
+
+    public static void setScrollViewUp() {
+        elementAction.scrollObject(SCROLL_VIEW, Direction.UP);
+    }
+
+    public static void setScrollViewUp(int numOfSroll) {
+        elementAction.scrollObject(SCROLL_VIEW, Direction.UP,numOfSroll);
+    }
+
+    public static void setScrollViewDown() {
+        elementAction.scrollObject(SCROLL_VIEW, Direction.DOWN);
+    }
+
+    public static void setScrollViewDown(int numOfScroll) {
+        elementAction.scrollObject(SCROLL_VIEW, Direction.DOWN,numOfScroll);
+    }
 
 }

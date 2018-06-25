@@ -1,19 +1,30 @@
 package com.global.mi.uidemo;
 
+import android.app.Instrumentation;
+import android.app.Notification;
+import android.app.UiAutomation;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 import android.util.Log;
+import android.view.accessibility.AccessibilityEvent;
 
-import com.global.mi.uidemo.uiautoutils.FindElement;
 
+import com.global.mi.uidemo.config.ConstDefs;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.lang.annotation.Target;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -28,6 +39,8 @@ public class ExampleInstrumentedTest {
 
     private UiDevice mDevice;
     final private String PACKAGE_NAME = "com.mi.global.shop";
+    String toastMessage;
+    long toastOccurTime;
 
     @Test
     public void useAppContext() throws Exception {
@@ -37,75 +50,78 @@ public class ExampleInstrumentedTest {
         assertEquals("com.global.mi.uidemo", appContext.getPackageName());
     }
 
+    @Before
+    public void startMainActivityFromHomeScreen() {
+//        initToastListener();
+        // Initialize UiDevice instance
+        mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+
+        // Start from the home screen
+//        mDevice.pressHome();
+
+        // Wait for launcher
+//        final String launcherPackage = getLauncherPackageName();
+//        assertThat(launcherPackage, notNullValue());
+//        mDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT);
+
+        // Launch the blueprint app
+        Context context = InstrumentationRegistry.getContext();
+        final Intent intent = context.getPackageManager()
+                .getLaunchIntentForPackage(ConstDefs.PACKAGE_NAME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);    // Clear out any previous instances
+//        context.startActivity(intent);
+
+        // Wait for the app to appear
+        mDevice.wait(Until.hasObject(By.pkg(ConstDefs.PACKAGE_NAME).depth(0)), 5000);
+    }
+
     @Test
     public void startActivity(){
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-//        FindElement fd = new FindElement();
-//        UiObject2 tabs = fd.findElement("icon");
-//        tabs.click();
-//        mDevice.pressHome();
-//
-//        Context context = InstrumentationRegistry.getContext();
-//        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.mi.global.shop");
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        context.startActivity(intent);
-//        mDevice.wait(Until.hasObject(By.pkg(PACKAGE_NAME).depth(0)), 8000);
-//        right_item_image
-//        UiObject2 tab = mDevice.findObject(By.res(PACKAGE_NAME,"icon"))    ;
-//        tab.click();
-//        String pack = InstrumentationRegistry.getTargetContext().getPackageName();
-//        List<UiObject2> tabs = mDevice.findObjects(By.res(PACKAGE_NAME,"icon"));
-//        System.out.println(tabs.size());
-//        tabs.get(3).click();
-//
-//        UiObject2 login = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"usercentral_fragment_listheader_login_btn")),1000);
-//        login.click();
-//
-//        UiObject2 sign = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"btn_start_login")),1000);
-//        sign.click();
-//
-//        UiObject2 login_with_uid = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"login_with_email_or_id")),1000);
-//        login_with_uid.click();
-//
-//        UiObject2 username = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"et_account_name")),1000);
-//        username.click();
-//        username.setText("267262511");
-//        UiObject2 password = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"et_account_password")),1000);
-//        password.click();
-//        password.setText("gg111111");
-//        UiObject2 btn_login = mDevice.findObject(By.res(PACKAGE_NAME,"btn_login"));
-//        btn_login.click();
-//        UiObject a = mDevice.findObject(new UiSelector());
-//
-//        List<UiObject2> products = mDevice.wait(Until.findObjects(By.res(PACKAGE_NAME,"product_image")),500);
-//        Log.i("products" , ""+ products.size());
-//        products.get(1).click();
+        mDevice.pressBack();
+        SystemClock.sleep(200);
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
 
-//        UiObject2 cart = mDevice.wait(Until.findObject(By.text("Cart")),3000);
-//        cart.click();
-        List<UiObject2> buys = mDevice.wait(Until.findObjects(By.clazz("android.view.View").depth(12)),6000);
-        Log.i("products buy","" + buys.size()+buys.toString());
-        UiObject2 buy = buys.get(3);
-//        buy.click();
-        UiObject2 buy1 = mDevice.wait(Until.findObject(By.clazz("android.view.View").depth(12)),6000);
-        Log.i("products buy","" + buy.toString());
-        buy1.click();
-//
-//        UiObject2 btn_return = mDevice.wait(Until.findObject(By.depth(0)),2000);
-//        btn_return.click();
-//        UiObject2 unpaid = mDevice.wait(Until.findObject(By.text("Unpaid")),1000);
-//        unpaid.click();
+        instrumentation.getUiAutomation().setOnAccessibilityEventListener(new UiAutomation.OnAccessibilityEventListener() {
+            @Override
+            public void onAccessibilityEvent(AccessibilityEvent event) {
+                //排除非通知事件
+                if (event.getEventType() != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED){
+                    return;
+                }
+                Parcelable parcelable = event.getParcelableData();
 
-//        UiObject2 lotaly = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"rl_loyalty")),1000);
-//        lotaly.click();
-//
-//        UiObject2 token = mDevice.wait(Until.findObject(By.depth(18).clazz("android.view.View")),8000);
-//        token.click();
-////        UiObject2 coupons = mDevice.wait(Until.findObject(By.textContains("Invite")),9000);
-////        coupons.click();
-//        UiObject2 btn_return = mDevice.wait(Until.findObject(By.res(PACKAGE_NAME,"title_bar_back")),7000);
-//        btn_return.click();
+                //如果排除下拉消息,则为其他通知消息,包括Toast
+                if (!(parcelable instanceof Notification)){
+                    toastMessage = (String) event.getText().get(0);
+                    toastOccurTime = event.getEventTime();
+                    Log.i(ConstDefs.TAG,toastMessage);
+                }else {
+                    Log.i(ConstDefs.TAG,event.getParcelableData().toString());
+                }
+            }
+        });
 
-
+        final long startTimeMillis = SystemClock.uptimeMillis();
+        boolean isSuccessfulCatchToast;
+        while (true) {
+            long currentTimeMillis = SystemClock.uptimeMillis();
+            long elapsedTimeMillis = currentTimeMillis - startTimeMillis;
+            if (elapsedTimeMillis > 5000L) {
+                Log.i("AAA", "超过5s未能捕获到预期Toast!");
+                isSuccessfulCatchToast = false;
+                break;
+            }
+            if (toastOccurTime > startTimeMillis) {
+                isSuccessfulCatchToast = "密码不正确".equals(toastMessage);
+                break;
+            }
+        }
+    }
+    @Test
+    public void test(){
+//        UiObject2 object2 = mDevice.findObject(By.res(ConstDefs.PACKAGE_NAME,"list"));
+        UiObject2 object2 = mDevice.findObject(By.res("android:id/list"));
+        object2.scroll(Direction.DOWN,20f);
     }
 }

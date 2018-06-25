@@ -23,7 +23,6 @@ public class DefaultRetryHandler implements RetryHandler {
     public void retry(String selector) {
         //TODO execute retry
         mCurrentRetryCount++;
-        mActions.actionRetry();
         if (!hasRetryCount()) {
             try {
                 throw new Exception();
@@ -36,6 +35,7 @@ public class DefaultRetryHandler implements RetryHandler {
     }
 
     private boolean hasRetryCount() {
-        return mCurrentRetryCount <= ConstDefs.MAXRETRYCOUNT;
+//        return mCurrentRetryCount <= ConstDefs.TotalRetryTime;
+        return false;
     }
 }
