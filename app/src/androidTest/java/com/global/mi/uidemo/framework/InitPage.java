@@ -24,9 +24,10 @@ public class InitPage {
      */
     public static void setAllField(Context context) throws Exception {
         List<Class> classes = getAllClassByBaseClass(context, Class.forName(ConstDefs.BASE_PAGE));
-        Log.i(ConstDefs.TAG,"start init pages fields...");
+        LogUtil.i("start init pages fields...");
         for (Class clazz:classes){
 //            clazz.getAnnotations();
+            LogUtil.i("start init "+clazz.getSimpleName()+" page fields...");
             Field[] fields = clazz.getFields();
             for (Field field: fields) {
                 field.setAccessible(true);
@@ -47,14 +48,15 @@ public class InitPage {
                         fieldValue = spliceSelector(ConstDefs.TEXT,by.text());
                     }
                 }
-                Log.i(ConstDefs.TAG,fieldValue);
+//                Log.i(ConstDefs.TAG,fieldValue);
                 if (!"".equals(fieldValue)){
                     field.set(clazz,fieldValue);
                 }
             }
+            LogUtil.i("end init "+clazz.getSimpleName()+" page fields.");
 
         }
-        Log.i(ConstDefs.TAG,"end init pages fields.");
+        LogUtil.i("end init pages fields.");
     }
 
     private static String spliceSelector(String type,String value){

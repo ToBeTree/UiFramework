@@ -8,6 +8,7 @@ import android.support.test.uiautomator.UiObject2;
 import android.util.Log;
 
 import com.global.mi.uidemo.config.ConstDefs;
+import com.global.mi.uidemo.framework.LogUtil;
 
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class Common {
 
     private BySelector parseSelector(String selector){
         BySelector bySelector = null;
-        Log.i(ConstDefs.TAG, selector);
+//        Log.i(ConstDefs.TAG, selector);
         if (selector == null || selector == "") {
-            Log.i(ConstDefs.TAG, "selector cannot be null or \"\"");
+            LogUtil.i("selector cannot be null or \"\"");
             return null;
         }
         String type = selector.split(ConstDefs.TYPE_OPERATOR)[0];
@@ -33,8 +34,8 @@ public class Common {
                 bySelector = By.res(ConstDefs.PACKAGE_NAME,value);
                 break;
             case "depth":
-                int depth = Integer.parseInt(value.split(ConstDefs.CLASS_OPERATOR)[1]);
-                value = value.split(ConstDefs.CLASS_OPERATOR)[0];
+                int depth = Integer.parseInt(value.split(ConstDefs.CLASS_OPERATOR)[0]);
+                value = value.split(ConstDefs.CLASS_OPERATOR)[1];
                 bySelector = By.depth(depth).clazz(value);
                 break;
             case "text":

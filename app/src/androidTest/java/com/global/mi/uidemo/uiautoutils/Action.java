@@ -8,6 +8,7 @@ import android.support.test.uiautomator.Until;
 import android.util.Log;
 
 import com.global.mi.uidemo.config.ConstDefs;
+import com.global.mi.uidemo.framework.LogUtil;
 
 import java.util.List;
 
@@ -29,10 +30,11 @@ public class Action {
         if (object2 != null) {
             if (wait) {
                 object2.clickAndWait(Until.newWindow(), ConstDefs.WAI_NEW_WINDOW_TIME);
+            }else{
+                object2.click();
             }
-            object2.click();
         } else {
-            Log.i(ConstDefs.TAG, "UiObject element can not be null");
+            LogUtil.i("UiObject element can not be null");
         }
 
     }

@@ -1,10 +1,10 @@
 package com.global.mi.uidemo.testcase;
 
-import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.global.mi.uidemo.framework.InitPage;
+import com.global.mi.uidemo.framework.LogUtil;
 import com.global.mi.uidemo.framework.ToastListener;
 import com.global.mi.uidemo.page.BasePage;
 import com.global.mi.uidemo.page.MainPage;
@@ -23,6 +23,7 @@ public class ShopCase {
 
     @BeforeClass
     public static void initToast() throws NoSuchFieldException, IllegalAccessException {
+
 //        ToastListener.initToastListener(InstrumentationRegistry.getInstrumentation());
 //        UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
 //        uiAutomation.setOnAccessibilityEventListener(new UiAutomation.OnAccessibilityEventListener() {
@@ -41,12 +42,12 @@ public class ShopCase {
 
 
     @Test
-    public void addCart(){
+    public void addCart() {
+        LogUtil.i("start test");
         MainPage.setScrollViewDown();
 //        MainPage.clickProduct(2);
 //        BasePage.takeScreenShot("error");
 //        BasePage.pressBack();
-        SystemClock.sleep(5000);
         MainPage.pressBack();
         BasePage.checkToastValue("Tap Back button again to exit");
 //        ProductPage.clickBuyBtn();

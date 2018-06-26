@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.global.mi.uidemo.config.ConstDefs;
 import com.global.mi.uidemo.framework.FindBy;
+import com.global.mi.uidemo.framework.LogUtil;
 
 /**
  * Created by wuyongqiang on 2018/5/28.
@@ -49,7 +50,7 @@ public class MainPage extends BasePage {
 
     public static boolean checkCurrentTabTitle(String title) {
         if ("".equals(title) || title == null) {
-            Log.i(ConstDefs.TAG, "check page title can not be null");
+            LogUtil.i("check page title can not be null");
             return false;
         }
         return title.equals(getCurrentTabTitle());
