@@ -27,7 +27,7 @@ public class DefaultRetryHandler implements RetryHandler {
             try {
                 throw new Exception();
             } catch (Exception e) {
-                Log.i(ConstDefs.TAG, "retry time is out!");
+                LogUtil.i(ConstDefs.TAG, "retry time is out!");
                 e.printStackTrace();
             }
         }

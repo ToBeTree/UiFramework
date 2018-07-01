@@ -42,10 +42,10 @@ public class ToastListener {
                     if (!(parcelable instanceof Notification)){
                         toastMessage = (String) event.getText().get(0);
                         toastOccurTime = event.getEventTime();
-                        LogUtil.i("Last Toast Message: "+toastMessage +"[Time: "+toastOccurTime+",Source: "+sourcePackageName +"]");
+                        LogUtil.i(ConstDefs.TAG,"Last Toast Message: "+toastMessage +"[Time: "+toastOccurTime+",Source: "+sourcePackageName +"]");
 
                     }else {
-                        LogUtil.i(event.getParcelableData().toString());
+                        LogUtil.i(ConstDefs.TAG,event.getParcelableData().toString());
                     }
                 }
             });

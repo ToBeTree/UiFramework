@@ -50,7 +50,7 @@ public class MainPage extends BasePage {
 
     public static boolean checkCurrentTabTitle(String title) {
         if ("".equals(title) || title == null) {
-            LogUtil.i("check page title can not be null");
+            LogUtil.i(ConstDefs.TAG,"check page title can not be null");
             return false;
         }
         return title.equals(getCurrentTabTitle());

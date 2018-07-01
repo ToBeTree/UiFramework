@@ -2,6 +2,7 @@ package com.global.mi.uidemo.page;
 
 import android.util.Log;
 
+import com.global.mi.uidemo.config.ConstDefs;
 import com.global.mi.uidemo.framework.FindBy;
 import com.global.mi.uidemo.framework.LogUtil;
 import com.global.mi.uidemo.uiautoutils.ElementActions;
@@ -25,7 +26,7 @@ public class StorePage extends MainPage {
 
     public static void clickProduct(int position) {
         if (position <= 0) {
-            LogUtil.i("Element position must be >=1");
+            LogUtil.i(ConstDefs.TAG,"Element position must be >=1");
         }
         PRODUCTS_LIST = PRODUCTS_LIST + "&" + Integer.toString(position - 1);
 //        ElementActions.clickAndWaitNewWindow(PRODUCTS_LIST);

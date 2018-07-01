@@ -24,7 +24,7 @@ public class Common {
         BySelector bySelector = null;
 //        Log.i(ConstDefs.TAG, selector);
         if (selector == null || selector == "") {
-            LogUtil.i("selector cannot be null or \"\"");
+            LogUtil.i(ConstDefs.TAG,"selector cannot be null or \"\"");
             return null;
         }
         String type = selector.split(ConstDefs.TYPE_OPERATOR)[0];
@@ -66,5 +66,9 @@ public class Common {
             return object2s;
         }
         return null;
+    }
+
+    public boolean hasObject2(String selector){
+        return mDevice.hasObject(parseSelector(selector));
     }
 }
