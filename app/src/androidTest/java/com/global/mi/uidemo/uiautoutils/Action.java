@@ -5,9 +5,11 @@ import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.global.mi.uidemo.config.ConstDefs;
+import com.global.mi.uidemo.framework.LogUtil;
 
 import java.util.List;
 
@@ -29,10 +31,11 @@ public class Action {
         if (object2 != null) {
             if (wait) {
                 object2.clickAndWait(Until.newWindow(), ConstDefs.WAI_NEW_WINDOW_TIME);
+            }else{
+                object2.click();
             }
-            object2.click();
         } else {
-            Log.i(ConstDefs.TAG, "UiObject element can not be null");
+            LogUtil.i(ConstDefs.TAG,"UiObject element can not be null");
         }
 
     }
@@ -86,6 +89,29 @@ public class Action {
         UiObject2 object2 = getObject2(selector);
 //        percent代表滚动的次数,每次滚动一屏
         object2.scroll(direction, num);
+    }
+
+    public void setText(String selector, String text){
+        UiObject2 object2 = getObject2(selector);
+        if (object2 != null){
+            //清除编辑框内容
+            if(!TextUtils.isEmpty(object2.getText())){
+                object2.clear();
+            }
+            object2.setText(text);
+        }
+    }
+
+    public String getText(String selector){
+        UiObject2 object2 = getObject2(selector);
+        if (object2 !=null){
+            return object2.getText();
+        }
+        return "";
+    }
+
+    public boolean isScreenOn(String selector){
+        return driver.hasObject2(selector);
     }
 
 

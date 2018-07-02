@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.lang.annotation.Target;
 import java.util.List;
 
@@ -120,8 +121,19 @@ public class ExampleInstrumentedTest {
     }
     @Test
     public void test(){
-//        UiObject2 object2 = mDevice.findObject(By.res(ConstDefs.PACKAGE_NAME,"list"));
-        UiObject2 object2 = mDevice.findObject(By.res("android:id/list"));
-        object2.scroll(Direction.DOWN,20f);
+        Context context = InstrumentationRegistry.getContext();
+        final Intent intent = context.getPackageManager()
+                .getLaunchIntentForPackage(ConstDefs.PACKAGE_NAME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);    // Clear out any previous instances
+        context.startActivity(intent);
+        try {
+            Process p = Runtime.getRuntime().exec("adb shell  pm list packages | grep com.mi.global.shop");
+            p.getOutputStream().toString();
+            int a = p.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
