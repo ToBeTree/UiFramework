@@ -1,5 +1,6 @@
 package com.global.mi.uidemo.uiautoutils;
 
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;
@@ -21,6 +22,7 @@ public class Common {
     private UiDevice mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
 
     private BySelector parseSelector(String selector){
+        SystemClock.sleep(100);
         BySelector bySelector = null;
 //        Log.i(ConstDefs.TAG, selector);
         if (selector == null || selector == "") {

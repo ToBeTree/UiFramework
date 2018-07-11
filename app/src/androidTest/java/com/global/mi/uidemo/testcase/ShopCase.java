@@ -1,19 +1,13 @@
 package com.global.mi.uidemo.testcase;
 
-import android.os.SystemClock;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.global.mi.uidemo.config.ConstDefs;
-import com.global.mi.uidemo.framework.InitPage;
 import com.global.mi.uidemo.framework.LogUtil;
-import com.global.mi.uidemo.framework.ToastListener;
 import com.global.mi.uidemo.page.BasePage;
 import com.global.mi.uidemo.page.MainPage;
-import com.global.mi.uidemo.uimodel.LoginPage;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,19 +18,6 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class ShopCase extends BaseCase{
 
-    @BeforeClass
-    public static void initToast() throws NoSuchFieldException, IllegalAccessException {
-
-//        ToastListener.initToastListener(InstrumentationRegistry.getInstrumentation());
-//        UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
-//        uiAutomation.setOnAccessibilityEventListener(new UiAutomation.OnAccessibilityEventListener() {
-//            @Override
-//            public void onAccessibilityEvent(AccessibilityEvent event) {
-//                Log.i(ConstDefs.TAG,"listener");
-//            }
-//        });
-    }
-
     @Before
     public void init() throws Exception {
 //        InitPage.setAllField(InstrumentationRegistry.getContext());
@@ -45,7 +26,8 @@ public class ShopCase extends BaseCase{
 
 
     @Test
-    public void addCart() {
+    public void addCart() throws Exception {
+//        LogUtil.i(ConstDefs.TAG,Runtime.getRuntime().exec("adb logcat").waitFor()+"");
 //        SystemClock.sleep(5000);
         LogUtil.e(ConstDefs.TAG,"start test");
         MainPage.setScrollViewDown();

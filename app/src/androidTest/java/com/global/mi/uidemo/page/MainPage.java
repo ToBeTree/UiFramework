@@ -25,8 +25,7 @@ public class MainPage extends BasePage {
     public static String CART;
     @FindBy(res = "iv_title_icon")
     public static String PAGE_TITLE;
-    @FindBy(clazz = "android.widget.ListView")
-    public static String SCROLL_VIEW;
+
 
     public static void clickStore() {
         elementAction.click(MI_STORE);
@@ -60,20 +59,6 @@ public class MainPage extends BasePage {
         return elementAction.getObject2(PAGE_TITLE).getText();
     }
 
-    public static void setScrollViewUp() {
-        elementAction.scrollObject(SCROLL_VIEW, Direction.UP);
-    }
 
-    public static void setScrollViewUp(int numOfSroll) {
-        elementAction.scrollObject(SCROLL_VIEW, Direction.UP,numOfSroll);
-    }
-
-    public static void setScrollViewDown() {
-        elementAction.scrollObject(SCROLL_VIEW, Direction.DOWN);
-    }
-
-    public static void setScrollViewDown(int numOfScroll) {
-        elementAction.scrollObject(SCROLL_VIEW, Direction.DOWN,numOfScroll);
-    }
 
 }

@@ -1,0 +1,10 @@
+
+<suite name="login_test">
+    <test name="login_test">
+        <classes>
+            <class name="com.global.mi.uidemo.testcase.LoginNGCase">
+
+            </class>
+        </classes>
+    </test>
+</suite>

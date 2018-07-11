@@ -1,6 +1,7 @@
 package com.global.mi.uidemo.page;
 
 import android.os.SystemClock;
+import android.support.test.uiautomator.Direction;
 
 import com.global.mi.uidemo.framework.ToastListener;
 import com.global.mi.uidemo.uiautoutils.Action;
@@ -42,6 +43,10 @@ public class BasePage {
         elementAction.pressBack();
     }
 
+    public static boolean isScreenOn(String view){
+        return elementAction.isScreenOn(view);
+    }
+
     public static String getCurrentWindowTitle() {
 
         return null;
@@ -49,5 +54,25 @@ public class BasePage {
 
     public static void takeScreenShot(String desription) {
         ElementActions.tackScreenShot(desription);
+    }
+
+//    public static void scrollView(String scroll_view,Direction direction, int numOfScroll){
+//        elementAction.scrollObject(scroll_view,direction,numOfScroll);
+//    }
+
+    public static void setScrollViewUp(String scroll_view) {
+        elementAction.scrollObject(scroll_view, Direction.UP);
+    }
+
+    public static void setScrollViewUp(String scroll_view,int numOfScroll) {
+        elementAction.scrollObject(scroll_view, Direction.UP,numOfScroll);
+    }
+
+    public static void setScrollViewDown(String scroll_view) {
+        elementAction.scrollObject(scroll_view, Direction.DOWN);
+    }
+
+    public static void setScrollViewDown(String scroll_view,int numOfScroll) {
+        elementAction.scrollObject(scroll_view, Direction.DOWN,numOfScroll);
     }
 }

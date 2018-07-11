@@ -45,9 +45,9 @@ public class LogUtil {
         // 设置日志输出级别
         configurator.setLevel("org.apache", Level.INFO);
         //设置 输出到日志文件的文字格式 默认 %d %-5p [%c{2}]-[%L] %m%n
-        configurator.setFilePattern("%-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n");
-        //设置输出到控制台的文字格式 默认%m%n
-        configurator.setLogCatPattern("%-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n");
+        configurator.setFilePattern("%-d{yyyy-MM-dd HH:mm:ss}  - [ %p ]  %m%n");
+        //设置输出到控制台的文字格式 默认%-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+        configurator.setLogCatPattern("%-d{yyyy-MM-dd HH:mm:ss}  - [ %p ]  %m%n");
         //设置总文件大小
         configurator.setMaxFileSize(1024 * 1024 * 5);
         //设置最大产生的文件个数

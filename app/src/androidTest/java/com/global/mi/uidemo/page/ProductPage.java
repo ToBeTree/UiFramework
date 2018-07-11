@@ -1,17 +1,16 @@
 package com.global.mi.uidemo.page;
 
-import com.global.mi.uidemo.uiautoutils.Action;
 import com.global.mi.uidemo.framework.FindBy;
-import com.global.mi.uidemo.uiautoutils.ElementActions;
 
 /**
  * Created by wuyongqiang on 2018/5/28.
  */
 
-public class ProductPage extends BasePage {
+public class ProductPage extends MainPage {
     public static String BTN_RETURN;
     @FindBy(depth = "12", clazz = "android.view.View", position = "3")
     public static String BTN_BUY;
+
 
     public static String BTN_CART;
 //    public static String BTN_BUY_INTERNAL;
@@ -30,5 +29,7 @@ public class ProductPage extends BasePage {
     public static void clickInternalBuyBtn() {
 
     }
+
+
 
 }

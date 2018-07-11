@@ -16,6 +16,8 @@ public class StorePage extends MainPage {
     @FindBy(description = "更多配件按钮")
     public static String accessories;
     public static String more;
+    @FindBy(clazz = "android.widget.ListView")
+    public static String SCROLL_VIEW;
 
     public static void clickProduct() {
 //        Action.click(PRODUCTS_LIST);
